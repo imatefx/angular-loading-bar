@@ -85,8 +85,15 @@ If you'd like to replace the default HTML template you can configure it by provi
 ```js
 angular.module('myApp', ['angular-loading-bar'])
   .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.parentSelector = 'loading-spinner-container';
     cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</div>';
   }])
+```
+
+```html
+<div>
+  <loading-spinner-container></loading-spinner-container>
+</div>
 ```
 
 #### Latency Threshold
