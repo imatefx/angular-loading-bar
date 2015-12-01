@@ -166,12 +166,14 @@ angular.module('cfp.loadingBar', [])
     this.latencyThreshold = 100;
     this.startSize = 0.02;
     this.parentSelector = 'body';
+    this.parentSelectorChildIndex = 0;
     this.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner-icon"></div></div>';
     this.loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
 
     this.$get = ['$injector', '$document', '$timeout', '$rootScope', function ($injector, $document, $timeout, $rootScope) {
       var $animate;
       var $parentSelector = this.parentSelector,
+        parentSelectorChildIndex = this.parentSelectorChildIndex,
         loadingBarContainer = angular.element(this.loadingBarTemplate),
         loadingBar = loadingBarContainer.find('div').eq(0),
         spinner = angular.element(this.spinnerTemplate);
@@ -194,7 +196,7 @@ angular.module('cfp.loadingBar', [])
           $animate = $injector.get('$animate');
         }
 
-        var $parent = $document.find($parentSelector).eq(0);
+        var $parent = $document.find($parentSelector).eq(parentSelectorChildIndex);
         $timeout.cancel(completeTimeout);
 
         // do not continually broadcast the started event:
